@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
@@ -26,7 +25,7 @@ namespace SimpleNet.ServerConsole
             _isStopped = true;
         }
 
-        private async Task HandleClientAsync()
+        private void HandleClient()
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -37,29 +36,30 @@ namespace SimpleNet.ServerConsole
                 {
                     stopwatch.Restart();
 
-                    var buffer = await _networkStreamReader.ReadAsync();
+                    var buffer = _networkStreamReader.Read();
 
-                    await _networkStreamWriter.WriteAsync(buffer);
+                    _networkStreamWriter.Write(buffer);
                 }
 
-                await Task.Delay(10);
+                Thread.Sleep(10);
             } while (!_isStopped && stopwatch.ElapsedMilliseconds < 5000);
 
+            _thread = null;
             _networkStreamWrapper.Dispose();
             _socketWrapper.Dispose();
         }
 
-        public async Task StartHandleAsync()
+        public void StartHandle()
         {
             if (_socketWrapper != null)
                 throw new InvalidOperationException("Already handled");
 
-            _socketWrapper = await _serverSocketWrapper.AcceptAsync();
+            _socketWrapper = _serverSocketWrapper.Accept();
             _networkStreamWrapper = _socketWrapper.CreateNetworkStream();
             _networkStreamReader = new NetworkStreamReader(_networkStreamWrapper);
             _networkStreamWriter = new NetworkStreamWriter(_networkStreamWrapper);
 
-            _thread = new Thread(async () => await HandleClientAsync());
+            _thread = new Thread(HandleClient);
             _thread.Start();
         }
     }

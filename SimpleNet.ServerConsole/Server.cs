@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
@@ -23,12 +22,12 @@ namespace SimpleNet.ServerConsole
             _socketWrapper.Dispose();
         }
 
-        private async Task AcceptLoopAsync()
+        private void AcceptLoop()
         {
             do
             {
                 var socketClientHandler = new SocketClientHandler(_socketWrapper);
-                await socketClientHandler.StartHandleAsync();
+                socketClientHandler.StartHandle();
             } while (!_isStopped);
         }
 
@@ -36,7 +35,7 @@ namespace SimpleNet.ServerConsole
         {
             _isStopped = false;
 
-            var acceptThread = new Thread(async () => await AcceptLoopAsync());
+            var acceptThread = new Thread(AcceptLoop);
             acceptThread.Start();
         }
     }

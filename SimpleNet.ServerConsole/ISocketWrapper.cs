@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
     public interface ISocketWrapper : IDisposable
     {
+        bool Connected { get; }
         void Bind(string address = null, int port = 0);
         void Listen(int count);
         INetworkStreamWrapper CreateNetworkStream();
-        Task<ISocketWrapper> AcceptAsync();
+        ISocketWrapper Accept();
         void Connect(string address, int port);
-        bool Connected { get; }
         void Shutdown(SocketShutdown socketShutdown);
         void Disconnect();
     }

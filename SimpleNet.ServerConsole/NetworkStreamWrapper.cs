@@ -30,5 +30,15 @@ namespace SimpleNet.ServerConsole
         {
             return _networkStream.WriteAsync(buffer, cancellationToken);
         }
+
+        public int Read(Span<byte> buffer)
+        {
+            return _networkStream.Read(buffer);
+        }
+
+        public void Write(ReadOnlySpan<byte> buffer)
+        {
+            _networkStream.Write(buffer);
+        }
     }
 }

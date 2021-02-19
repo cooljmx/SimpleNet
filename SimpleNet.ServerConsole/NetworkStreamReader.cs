@@ -32,5 +32,24 @@ namespace SimpleNet.ServerConsole
 
             return buffer;
         }
+
+        public ReadOnlySpan<byte> Read()
+        {
+            var lengthBuffer = new byte[LengthBufferSize];
+            var receivedLength = _networkStreamWrapper.Read(lengthBuffer);
+
+            if (receivedLength != lengthBuffer.Length)
+                throw new InvalidOperationException("Wrong length buffer size");
+
+            var length = BitConverter.ToUInt32(lengthBuffer);
+            var buffer = new byte[length];
+
+            receivedLength = _networkStreamWrapper.Read(buffer);
+
+            if (receivedLength != length)
+                throw new InvalidOperationException("Wrong buffer size");
+
+            return buffer;
+        }
     }
 }

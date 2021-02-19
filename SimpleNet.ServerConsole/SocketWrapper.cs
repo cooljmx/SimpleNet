@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
@@ -39,9 +38,9 @@ namespace SimpleNet.ServerConsole
             return new NetworkStreamWrapper(_socket);
         }
 
-        public async Task<ISocketWrapper> AcceptAsync()
+        public ISocketWrapper Accept()
         {
-            var socket = await _socket.AcceptAsync();
+            var socket = _socket.Accept();
 
             var socketWrapper = new SocketWrapper(socket);
 

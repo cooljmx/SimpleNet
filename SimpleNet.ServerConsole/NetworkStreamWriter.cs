@@ -20,5 +20,13 @@ namespace SimpleNet.ServerConsole
             await _networkStreamWrapper.WriteAsync(lengthBuffer, CancellationToken.None);
             await _networkStreamWrapper.WriteAsync(buffer, CancellationToken.None);
         }
+
+        public void Write(in ReadOnlySpan<byte> buffer)
+        {
+            var lengthBuffer = BitConverter.GetBytes(buffer.Length);
+
+            _networkStreamWrapper.Write(lengthBuffer);
+            _networkStreamWrapper.Write(buffer);
+        }
     }
 }
