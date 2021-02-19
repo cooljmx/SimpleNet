@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
     public class NetworkStreamReader
     {
-        public const int LengthBufferSize = 4;
-        private readonly NetworkStream _networkStream;
+        private const int LengthBufferSize = 4;
+        private readonly INetworkStreamWrapper _networkStreamWrapper;
 
-        public NetworkStreamReader(NetworkStream networkStream)
+        public NetworkStreamReader(INetworkStreamWrapper networkStreamWrapper)
         {
-            _networkStream = networkStream;
+            _networkStreamWrapper = networkStreamWrapper;
         }
 
         public async Task<byte[]> ReadAsync()
         {
             var lengthBuffer = new byte[LengthBufferSize];
-            var receivedLength = await _networkStream.ReadAsync(lengthBuffer);
+            var receivedLength = await _networkStreamWrapper.ReadAsync(lengthBuffer, CancellationToken.None);
 
             if (receivedLength != lengthBuffer.Length)
                 throw new InvalidOperationException("Wrong length buffer size");
@@ -25,7 +25,7 @@ namespace SimpleNet.ServerConsole
             var length = BitConverter.ToUInt32(lengthBuffer);
             var buffer = new byte[length];
 
-            receivedLength = await _networkStream.ReadAsync(buffer);
+            receivedLength = await _networkStreamWrapper.ReadAsync(buffer, CancellationToken.None);
 
             if (receivedLength != length)
                 throw new InvalidOperationException("Wrong buffer size");

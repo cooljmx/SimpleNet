@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -7,20 +6,27 @@ namespace SimpleNet.ServerConsole
 {
     public class Client : IDisposable
     {
-        private readonly Socket _socket;
+        private readonly ISocketWrapper _socketWrapper;
 
         public Client()
         {
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socketWrapper = new SocketWrapper();
+        }
+
+        public void Dispose()
+        {
+            _socketWrapper.Shutdown(SocketShutdown.Both);
+            _socketWrapper.Disconnect();
+            _socketWrapper.Dispose();
         }
 
         public async Task StartAsync()
         {
-            _socket.Connect(IPAddress.Parse("127.0.0.1"), 3000);
+            _socketWrapper.Connect("127.0.0.1", 3000);
 
-            if (_socket.Connected)
+            if (_socketWrapper.Connected)
             {
-                var networkStream = new NetworkStream(_socket);
+                var networkStream = _socketWrapper.CreateNetworkStream();
                 var networkStreamReader = new NetworkStreamReader(networkStream);
                 var networkStreamWriter = new NetworkStreamWriter(networkStream);
 
@@ -33,13 +39,6 @@ namespace SimpleNet.ServerConsole
                 var actualLength = BitConverter.ToUInt32(buffer);
                 Console.WriteLine(actualLength);
             }
-        }
-
-        public void Dispose()
-        {
-            _socket.Shutdown(SocketShutdown.Both);
-            _socket.Disconnect(false);
-            _socket.Dispose();
         }
     }
 }

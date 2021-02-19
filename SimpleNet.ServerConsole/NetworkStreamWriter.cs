@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SimpleNet.ServerConsole
 {
     public class NetworkStreamWriter
     {
-        private readonly NetworkStream _networkStream;
+        private readonly INetworkStreamWrapper _networkStreamWrapper;
 
-        public NetworkStreamWriter(NetworkStream networkStream)
+        public NetworkStreamWriter(INetworkStreamWrapper networkStreamWrapper)
         {
-            _networkStream = networkStream;
+            _networkStreamWrapper = networkStreamWrapper;
         }
 
         public async Task WriteAsync(ReadOnlyMemory<byte> buffer)
         {
             var lengthBuffer = BitConverter.GetBytes(buffer.Length);
 
-            await _networkStream.WriteAsync(lengthBuffer);
-            await _networkStream.WriteAsync(buffer);
+            await _networkStreamWrapper.WriteAsync(lengthBuffer, CancellationToken.None);
+            await _networkStreamWrapper.WriteAsync(buffer, CancellationToken.None);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace SimpleNet.ServerConsole
     {
         private static void Main(string[] args)
         {
-            if (args.Length == 2 && args[0] == "client")
+            if (args.Length == 1 && args[0] == "client")
             {
                 using var client = new Client();
                 client.StartAsync().GetAwaiter().GetResult();
