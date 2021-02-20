@@ -1,4 +1,4 @@
-﻿namespace SimpleNet.ServerConsole.Infrastructure.Common
+﻿namespace SimpleNet.ServerConsole.Protocol
 {
     public enum MessageType
     {

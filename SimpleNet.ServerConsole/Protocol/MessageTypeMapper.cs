@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SimpleNet.ServerConsole.Protocol;
+using SimpleNet.Infrastructure.Common;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Common
+namespace SimpleNet.ServerConsole.Protocol
 {
     internal class MessageTypeMapper : IMessageTypeMapper
     {

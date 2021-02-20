@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Common
+namespace SimpleNet.Infrastructure.Common
 {
     public class NetworkStreamReader
     {

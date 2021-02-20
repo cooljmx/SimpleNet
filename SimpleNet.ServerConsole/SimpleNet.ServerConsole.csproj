@@ -9,4 +9,10 @@
     <PackageReference Include="protobuf-net" Version="3.0.73" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleNet.Infrastructure.Client\SimpleNet.Infrastructure.Client.csproj" />
+    <ProjectReference Include="..\SimpleNet.Infrastructure.Common\SimpleNet.Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\SimpleNet.Infrastructure.Server\SimpleNet.Infrastructure.Server.csproj" />
+  </ItemGroup>
+
 </Project>

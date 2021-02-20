@@ -1,6 +1,6 @@
 ﻿using System;
-using SimpleNet.ServerConsole.Infrastructure.Client;
-using SimpleNet.ServerConsole.Infrastructure.Server;
+using SimpleNet.Infrastructure.Client;
+using SimpleNet.Infrastructure.Server;
 
 namespace SimpleNet.ServerConsole
 {

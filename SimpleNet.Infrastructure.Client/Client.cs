@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using SimpleNet.ServerConsole.Infrastructure.Common;
+using SimpleNet.Infrastructure.Common;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Client
+namespace SimpleNet.Infrastructure.Client
 {
     public class Client : IDisposable
     {

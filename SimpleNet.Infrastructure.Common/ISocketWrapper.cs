@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Common
+namespace SimpleNet.Infrastructure.Common
 {
     public interface ISocketWrapper : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿namespace SimpleNet.ServerConsole.Infrastructure.Common
+﻿namespace SimpleNet.Infrastructure.Common
 {
     public class DeserializedMessage
     {

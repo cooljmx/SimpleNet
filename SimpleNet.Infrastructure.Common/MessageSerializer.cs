@@ -2,7 +2,7 @@
 using System.IO;
 using ProtoBuf;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Common
+namespace SimpleNet.Infrastructure.Common
 {
     internal class MessageSerializer
     {

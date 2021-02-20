@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleNet.ServerConsole.Infrastructure.Common
+namespace SimpleNet.Infrastructure.Common
 {
     public interface IMessageTypeMapper
     {
