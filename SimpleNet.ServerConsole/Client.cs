@@ -13,13 +13,6 @@ namespace SimpleNet.ServerConsole
             _socketWrapper = new SocketWrapper();
         }
 
-        public void Dispose()
-        {
-            _socketWrapper.Shutdown(SocketShutdown.Both);
-            _socketWrapper.Disconnect();
-            _socketWrapper.Dispose();
-        }
-
         public async Task StartAsync()
         {
             _socketWrapper.Connect("127.0.0.1", 3000);
@@ -39,6 +32,13 @@ namespace SimpleNet.ServerConsole
                 var actualLength = BitConverter.ToUInt32(buffer);
                 Console.WriteLine(actualLength);
             }
+        }
+
+        public void Dispose()
+        {
+            _socketWrapper.Shutdown(SocketShutdown.Both);
+            _socketWrapper.Disconnect();
+            _socketWrapper.Dispose();
         }
     }
 }

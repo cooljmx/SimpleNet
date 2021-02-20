@@ -14,11 +14,6 @@ namespace SimpleNet.ServerConsole
             _networkStream = new NetworkStream(socket);
         }
 
-        public void Dispose()
-        {
-            _networkStream.Dispose();
-        }
-
         public bool DataAvailable => _networkStream.DataAvailable;
 
         public ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
@@ -39,6 +34,11 @@ namespace SimpleNet.ServerConsole
         public void Write(ReadOnlySpan<byte> buffer)
         {
             _networkStream.Write(buffer);
+        }
+
+        public void Dispose()
+        {
+            _networkStream.Dispose();
         }
     }
 }

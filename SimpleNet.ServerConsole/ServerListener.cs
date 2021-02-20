@@ -5,9 +5,9 @@ namespace SimpleNet.ServerConsole
 {
     internal class ServerListener : IDisposable
     {
-        private readonly ISocketWrapper _socketWrapper;
         private readonly CancellationToken _cancellationToken;
         private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly ISocketWrapper _socketWrapper;
 
         public ServerListener()
         {
@@ -17,14 +17,6 @@ namespace SimpleNet.ServerConsole
             _socketWrapper = new SocketWrapper();
             _socketWrapper.Bind(port: 3000);
             _socketWrapper.Listen(2);
-        }
-
-        public void Dispose()
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-
-            _socketWrapper.Dispose();
         }
 
         private void AcceptLoop()
@@ -39,6 +31,14 @@ namespace SimpleNet.ServerConsole
         public void Start()
         {
             new Thread(AcceptLoop).Start();
+        }
+
+        public void Dispose()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+
+            _socketWrapper.Dispose();
         }
     }
 }

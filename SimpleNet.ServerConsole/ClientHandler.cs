@@ -12,7 +12,7 @@ namespace SimpleNet.ServerConsole
         private INetworkStreamWrapper _networkStreamWrapper;
         private NetworkStreamWriter _networkStreamWriter;
         private ISocketWrapper _socketWrapper;
-        
+
         public ClientHandler(ISocketWrapper serverSocketWrapper, CancellationToken cancellationToken)
         {
             _serverSocketWrapper = serverSocketWrapper;
