@@ -4,25 +4,19 @@ using System.Threading;
 
 namespace SimpleNet.ServerConsole
 {
-    internal class SocketClientHandler
+    internal class ClientHandler
     {
+        private readonly CancellationToken _cancellationToken;
         private readonly ISocketWrapper _serverSocketWrapper;
-        private bool _isStopped;
         private NetworkStreamReader _networkStreamReader;
         private INetworkStreamWrapper _networkStreamWrapper;
         private NetworkStreamWriter _networkStreamWriter;
         private ISocketWrapper _socketWrapper;
-        private Thread _thread;
-
-
-        public SocketClientHandler(ISocketWrapper serverSocketWrapper)
+        
+        public ClientHandler(ISocketWrapper serverSocketWrapper, CancellationToken cancellationToken)
         {
             _serverSocketWrapper = serverSocketWrapper;
-        }
-
-        public void StopHandle()
-        {
-            _isStopped = true;
+            _cancellationToken = cancellationToken;
         }
 
         private void HandleClient()
@@ -42,9 +36,8 @@ namespace SimpleNet.ServerConsole
                 }
 
                 Thread.Sleep(10);
-            } while (!_isStopped && stopwatch.ElapsedMilliseconds < 5000);
+            } while (!_cancellationToken.IsCancellationRequested && stopwatch.ElapsedMilliseconds < 5000);
 
-            _thread = null;
             _networkStreamWrapper.Dispose();
             _socketWrapper.Dispose();
         }
@@ -59,8 +52,7 @@ namespace SimpleNet.ServerConsole
             _networkStreamReader = new NetworkStreamReader(_networkStreamWrapper);
             _networkStreamWriter = new NetworkStreamWriter(_networkStreamWrapper);
 
-            _thread = new Thread(HandleClient);
-            _thread.Start();
+            new Thread(HandleClient).Start();
         }
     }
 }

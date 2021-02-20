@@ -8,12 +8,15 @@ namespace SimpleNet.ServerConsole
         {
             if (args.Length == 1 && args[0] == "client")
             {
-                using var client = new Client();
-                client.StartAsync().GetAwaiter().GetResult();
+                for (var i = 0; i < 100; i++)
+                {
+                    using var client = new Client();
+                    client.StartAsync().GetAwaiter().GetResult();
+                }
             }
             else
             {
-                using var server = new Server();
+                using var server = new ServerListener();
                 server.Start();
 
                 Console.ReadKey();
