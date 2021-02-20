@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace SimpleNet.ServerConsole.Protocol
+namespace SimpleNet.Protocol
 {
     [ProtoContract]
     public class HeartBeatMessage

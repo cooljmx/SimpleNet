@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using SimpleNet.Infrastructure.Common;
 
-namespace SimpleNet.ServerConsole.Protocol
+namespace SimpleNet.Protocol
 {
     internal class MessageTypeMapper : IMessageTypeMapper
     {
         private readonly Dictionary<MessageType, Type> _messageTypeToType = new Dictionary<MessageType, Type>
         {
-            {MessageType.HeartBeat, typeof(HeartBeatMessage)}
+            {MessageType.HeartBeatRequest, typeof(HeartBeatMessage)}
         };
 
         private readonly Dictionary<Type, MessageType> _typeToMessageType = new Dictionary<Type, MessageType>();

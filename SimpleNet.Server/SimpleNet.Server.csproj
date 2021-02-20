@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleNet.Infrastructure.Server\SimpleNet.Infrastructure.Server.csproj" />
+    <ProjectReference Include="..\SimpleNet.Protocol\SimpleNet.Protocol.csproj" />
+  </ItemGroup>
+
+</Project>
