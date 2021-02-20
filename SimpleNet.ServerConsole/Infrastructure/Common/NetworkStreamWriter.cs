@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleNet.ServerConsole
+namespace SimpleNet.ServerConsole.Infrastructure.Common
 {
     public class NetworkStreamWriter
     {

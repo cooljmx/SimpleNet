@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using SimpleNet.ServerConsole.Infrastructure.Common;
 
-namespace SimpleNet.ServerConsole
+namespace SimpleNet.ServerConsole.Infrastructure.Server
 {
     internal class ClientHandler
     {

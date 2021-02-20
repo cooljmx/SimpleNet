@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleNet.ServerConsole
+namespace SimpleNet.ServerConsole.Infrastructure.Common
 {
     internal class NetworkStreamWrapper : INetworkStreamWrapper
     {
