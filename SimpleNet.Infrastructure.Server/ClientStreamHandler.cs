@@ -5,7 +5,7 @@ using SimpleNet.Infrastructure.Common;
 
 namespace SimpleNet.Infrastructure.Server
 {
-    internal class ClientHandler
+    internal class ClientStreamHandler
     {
         private readonly CancellationToken _cancellationToken;
         private readonly ISocketWrapper _serverSocketWrapper;
@@ -14,7 +14,9 @@ namespace SimpleNet.Infrastructure.Server
         private NetworkStreamWriter _networkStreamWriter;
         private ISocketWrapper _socketWrapper;
 
-        public ClientHandler(ISocketWrapper serverSocketWrapper, CancellationToken cancellationToken)
+        public ClientStreamHandler(
+            ISocketWrapper serverSocketWrapper,
+            CancellationToken cancellationToken)
         {
             _serverSocketWrapper = serverSocketWrapper;
             _cancellationToken = cancellationToken;

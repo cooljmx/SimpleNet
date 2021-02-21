@@ -24,7 +24,7 @@ namespace SimpleNet.Infrastructure.Server
         {
             do
             {
-                var socketClientHandler = new ClientHandler(_socketWrapper, _cancellationToken);
+                var socketClientHandler = new ClientStreamHandler(_socketWrapper, _cancellationToken);
                 socketClientHandler.StartHandle();
             } while (!_cancellationToken.IsCancellationRequested);
         }
